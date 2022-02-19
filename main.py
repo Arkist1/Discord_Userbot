@@ -1,7 +1,9 @@
-import Guild
+from Guild import Guild
+from Classes import DiscordAccount
 import Channel
-import DiscordAccount
 import base64
+import requests
+
 
 def getpfp(file):
     with open(file, "rb") as f:
@@ -33,10 +35,16 @@ if __name__ == '__main__':
     for passtoken in tokens:
         bots.append(DiscordAccount(passtoken["token"], passtoken["password"]))
 
-    for bot in bots:
-        bot.joinserver("bwsFZkRM")
 
+    # for bot in bots:
+    #     bot.joinserver("ESpJnpnC")
+    #
+    # guild = Guild(937074826659651585, bots[0].token)
+    #
+    # for bot in bots:
+    #     for channel in guild.textchannels:
+    #         channel.sendmessage("xd", bot)
 
-    Guild("895773448503197696", "NTI5MDA4NzQyMDYzMjc2MDYy.YfceJA.qAM8TWe-k4JwmpYRI8RnCgNFOpo")
-    Guild("713444727558504500", "NTI5MDA4NzQyMDYzMjc2MDYy.YfceJA.qAM8TWe-k4JwmpYRI8RnCgNFOpo")
-
+    print(bots[0].authheader)
+    r = requests.get("https://discord.com/api/v9/guilds/895773448503197696/members", headers=bots[0].authheader)
+    print(r.text)
